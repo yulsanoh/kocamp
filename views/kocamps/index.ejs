@@ -1,0 +1,33 @@
+<% layout('layouts/boilerplate.ejs') %>
+
+<section>
+  <div class="container text-center">
+    <div id="map" class="map"></div>
+    <h2>모든 캠핑장</h2>
+    <a href="/kocamps/new"><button class="btn-red">새로 만들기</button></a>
+    <div class="mt-60 flexbox flex-wrap space-between">
+      <% for(let camp of kocamps) { %>
+      <a class="block mb" href="/kocamps/<%= camp._id %>">
+        <div class="card">
+          <div class="card-image">
+            <% if(camp.images.length) { %>
+            <img src="<%= camp.images[0].url %> " alt="" />
+            <% } else { %>
+            <img src="" alt="" />
+            <% } %>
+          </div>
+          <div class="card-bottom">
+            <h3><%= camp.title %></h3>
+            <p><%= camp.location %></p>
+          </div>
+        </div>
+      </a>
+      <% } %>
+    </div>
+  </div>
+</section>
+<script>
+  const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
+  const kocamps = {features: <%- JSON.stringify(kocamps) %>}
+</script>
+<script src="/js/clusterMap.js"></script>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>kocamp | 캠핑인들을 위한 캠핑장 리뷰 사이트</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <section class="index-section">
+      <nav class="index-nav">
+        <div class="container">
+          <a href="/" class="logo"><img src="/images/Camp.png" alt="" /></a>
+          <div class="menu">
+            <ul>
+              <li><a href="/">홈</a></li>
+              <li><a href="/kocamps">캠프그라운드</a></li>
+              <% if (!isAuthenticated) { %>
+              <li>
+                <a href="/login"><button class="nav-btn">로그인</button></a>
+              </li>
+              <% } else { %>
+              <li>
+                <a href="/logout"><button class="nav-btn">로그아웃</button></a>
+              </li>
+              <% } %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="index-content">
+          <h1>자연에서 <br />좋은 시간 보내세요</h1>
+          <p>
+            도시 생활의 활동에 지루함을 느낀 당신!<br />
+            아름다운 자연의 아름다움에서 당신의 시간을 즐기면서 상쾌하게 재충전 해보세요!
+          </p>
+          <% if (!isAuthenticated) { %>
+          <a href="/register"><button class="btn-red">회원가입</button></a>
+          <a href="/login"><button class="btn-ghost">로그인</button></a>
+          <% } else { %>
+          <a href="/logout"><button class="btn-red">로그아웃</button></a>
+          <% } %>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="second-section">
+          <h2>
+            최고의 자연을<br />
+            만나보세요
+          </h2>
+          <p>아름답고 독특한 자연경관과 다양한 종류의 활동들로 우리의 캠핑 활동의 기반이 되는 많은 장소들이 있습니다.</p>
+          <div class="second-images flexbox">
+            <img src="/images/second.jpg" alt="" />
+            <img src="/images/second2.jpg" alt="" />
+            <img src="/images/second3.jpg" alt="" />
+            <img src="/images/second4.jpg" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="third-section">
+      <div class="container">
+        <div class="third-section">
+          <div class="third-section-desc">
+            <h2>
+              캠핑장에<br />
+              리뷰를 남겨주세요
+            </h2>
+            <p>방문한 캠핑장에 리뷰를 남겨보고, 다른 사람이 작성한 리뷰도 확인해보세요 :-)</p>
+          </div>
+          <div class="third-section-images">
+            <img src="/images/third.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="last-section">
+          <div class="last-section-images">
+            <img src="/images/last.png" alt="" />
+          </div>
+          <div class="last-section-desc">
+            <h2>캠핑을 위한 앱</h2>
+            <p>지금 바로 가입해보세요😀</p>
+            <% if (!isAuthenticated) { %>
+            <a href="/register"><button class="btn-red">회원가입</button></a>
+            <a href="/login"><button class="btn-ghost">로그인</button></a>
+            <% } else { %> <% } %>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer bg-dark py-3 mt-auto">
+      <div class="container">
+        <span class="text-muted">&copy; Kocamp 2022</span>
+      </div>
+    </footer>
+  </body>
+</html>

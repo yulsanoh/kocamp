@@ -1,0 +1,98 @@
+<% layout('layouts/boilerplate.ejs') %>
+
+<section>
+  <div class="container camp-card-container">
+    <div class="camp-card left">
+      <div class="camp-card-image">
+        <% for(let img of kocamp.images) { %>
+        <img src="<%= img.url %>" alt="" />
+        <% } %>
+      </div>
+      <div class="camp-card-desc">
+        <h3><%= kocamp.title %></h3>
+        <p class="caption"><%= kocamp.location %></p>
+        <p class="caption">작성자: <%= kocamp.author.username %></p>
+        <p class="caption">가격: <%= kocamp.price %>원 / 1박</p>
+        <p><%= kocamp.description %></p>
+        <div class="camp-card-buttons">
+          <% if(currentUser && kocamp.author.equals(currentUser._id)) { %>
+          <div class="camp-card-buttons-left">
+            <a href="/kocamps/<%= kocamp._id %>/edit"><button class="font-black btn-white">수정</button></a>
+            <form action="/kocamps/<%= kocamp._id %>?_method=DELETE" method="POST">
+              <button class="btn-red">삭제</button>
+            </form>
+          </div>
+          <% } %>
+          <a href="/kocamps"><button class="font-black btn-white">목록으로</button></a>
+        </div>
+      </div>
+    </div>
+    <div class="camp-card right">
+      <div id="map" class="map"></div>
+      <div class="camp-card-reviews text-center">
+        <h3>이 장소에 후기를 남겨주세요</h3>
+        <form action="/kocamps/<%= kocamp._id %>/reviews" method="POST">
+          <fieldset class="starability-basic">
+            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="3" checked aria-label="No rating." />
+            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+            <label for="first-rate1" title="Terrible">1 star</label>
+            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+            <label for="first-rate2" title="Not good">2 stars</label>
+            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+            <label for="first-rate3" title="Average">3 stars</label>
+            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+            <label for="first-rate4" title="Very good">4 stars</label>
+            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+            <label for="first-rate5" title="Amazing">5 stars</label>
+          </fieldset>
+          <div>
+            <textarea name="review[body]" id="body" cols="30" rows="3"></textarea>
+          </div>
+          <button class="font-black btn-white">작성</button>
+        </form>
+      </div>
+      <div class="border"></div>
+      <div class="camp-card-reviews text-center">
+        <h3>후기</h3>
+        <% for(let review of kocamp.reviews) { %>
+        <div class="camp-card-review">
+          <h4><%= review.author.username %></h4>
+          <p class="starability-result" data-rating="<%= review.rating %>">Rated: 3 stars</p>
+          <p><%= review.body %></p>
+          <% if(currentUser && review.author.equals(currentUser._id)) { %>
+          <form action="/kocamps/<%= kocamp._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+            <button class="btn-red">리뷰 삭제</button>
+          </form>
+          <% } %>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="camp-card"></div> -->
+</section>
+
+<script>
+  const kocamp = <%- JSON.stringify(kocamp) %>
+
+  mapboxgl.accessToken = "<%- process.env.MAPBOX_TOKEN %>";
+  const map = new mapboxgl.Map({
+    container: "map",
+    style: "mapbox://styles/mapbox/streets-v11",
+    center: kocamp.geometry.coordinates,
+    zoom: 10,
+    projection: "globe",
+  });
+  map.on("style.load", () => {
+    map.setFog({});
+  });
+
+  const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+  `<h3>${kocamp.title}</h3><p>${kocamp.location}</p>`
+  );
+
+  new mapboxgl.Marker()
+  .setLngLat(kocamp.geometry.coordinates)
+  .setPopup(popup)
+  .addTo(map);
+</script>

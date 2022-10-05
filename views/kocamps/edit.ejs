@@ -1,0 +1,32 @@
+<% layout('layouts/boilerplate.ejs') %>
+<section>
+  <div class="container">
+    <div class="new-form font-black">
+      <h3>캠핑장 수정하기</h3>
+      <form action="/kocamps/<%= kocamp._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <div>
+          <label for="title">캠핑장 이름</label>
+          <input type="text" id="title" name="kocamp[title]" value="<%= kocamp.title %>" />
+        </div>
+        <div>
+          <label for="location">위치(우편번호, 구, 시)</label>
+          <input type="text" id="location" name="kocamp[location]" value="<%= kocamp.location %>" />
+        </div>
+        <div>
+          <label for="image">이미지 변경</label>
+          <input type="file" name="kocamp[image]" id="image" />
+        </div>
+        <div>
+          <label for="price">가격</label>
+          <input type="text" id="price" name="kocamp[price]" value="<%= kocamp.price %>" />
+        </div>
+        <div>
+          <label for="description">캠핑장 설명</label>
+          <textarea name="kocamp[description]" id="description" cols="30" rows="10"><%= kocamp.description %></textarea>
+        </div>
+        <button class="btn-red">수정하기</button>
+      </form>
+      <a href="/kocamps/<%= kocamp._id %>">캠핑장으로 돌아가기</a>
+    </div>
+  </div>
+</section>
