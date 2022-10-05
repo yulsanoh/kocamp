@@ -244,6 +244,10 @@ a.logo {
 	height: 30px;
 }
 
+a.logo img {
+	width: 100%;
+}
+
 .menu ul {
 	font-size: 16px;
 	display: flex;
@@ -315,7 +319,8 @@ nav.index-nav {
 	justify-content: space-between;
 }
 
-.second-section {
+.second-section,
+.third-section {
 	text-align: center;
 	margin-top: 40px;
 }
@@ -521,7 +526,7 @@ div.card {
 	margin-bottom: 20px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1365px) {
 	section {
 		padding: 20px 60px;
 	}
@@ -555,6 +560,10 @@ div.card {
 	
 	.third-section-images img {
 		width: 100%;
+	}
+
+	.last-section {
+		margin-top: 20px;
 	}
 
 	.last-section-desc {
@@ -607,9 +616,42 @@ div.card {
 	}
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 767px) {
+	section,
+	section.index-section,
+	nav {
+		padding: 0 20px;
+	}
+
+	footer {
+		padding: 20px;
+		margin-top: 40px;
+	}
+
+	a.logo {
+		width: 20vw;
+	}
+
+	.menu ul {
+		font-size: 14px;
+	}
+
+	.index-content {
+		width: 100%;
+		text-align: center;
+	}
+
+	.index-content p,
+	.second-section p,
+	.third-section p,
+	.last-section p {
+		width: 100%;
+		line-height: 24px;
+	}
+
 	button {
 		font-size: 14px;
+		padding: 12px 28px;
 	}
 
 	div.card {
@@ -617,22 +659,65 @@ div.card {
 	}
 
 	h1 {
-		font-size: 52px;
+		font-size: 36px;
 		font-weight: 600;
 	}
 
 	h2 {
-		font-size: 40px;
+		font-size: 32px;
+		width: 100%;
+	}
+
+	.camp-card-review h4 {
+		font-size: 16px;
+	}
+
+	.new-form {
+		text-align: center;
+	}
+
+	.new-form h3 {
+		font-size: 24px;
 	}
 
 	.login-form-container form > div input,
 	.new-form input,
 	.new-form textarea {
-		width: 91%;
+		width: 87%;
 	}
 
 	.login-form-container h3 {
 		font-size: 24px;
+	}
+
+	.camp-card:nth-of-type(2) h3 {
+		font-size: 20px;
+	}
+
+	.camp-card-buttons {
+		flex-wrap: wrap;
+	}
+
+	.camp-card-buttons > a {
+		margin-left: 0px;
+		margin-top: 12px;
+	}
+
+	.camp-card-buttons > a button {
+		width: 120px;
+	}
+
+	.camp-card-reviews textarea {
+		width: 87%;
+		margin-bottom: 12px;
+	}
+
+	.last-section-images img {
+		width: 100%;
+	}
+
+	footer .text-muted {
+		font-size: 14px;
 	}
 
 	label {
@@ -640,6 +725,6 @@ div.card {
 	}
 
 	p {
-		font-size: 16px;
+		font-size: 14px;
 	}
 }
